@@ -6,7 +6,7 @@
 /*   By: flahoud <flahoud@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 11:51:43 by flahoud           #+#    #+#             */
-/*   Updated: 2022/08/11 11:40:11 by flahoud          ###   ########.fr       */
+/*   Updated: 2022/11/08 12:54:44 by flahoud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,12 @@ int	init_table_feast(t_table *table)
 	pthread_mutex_init(&table->mutex, NULL);
 	while (++i < table->nphilo)
 	{
-		init_philo(table->philo[i], i);
 		pthread_mutex_init(&table->philo[i]->mutex, NULL);
+		init_philo(table->philo[i], i);
+	}
+	i = -1;
+	while (++i < table->nphilo)
+	{
 		table->philo[i]->t = malloc(sizeof(*table->philo[i]->t));
 		if (!table->philo[i]->t)
 			return (1);
